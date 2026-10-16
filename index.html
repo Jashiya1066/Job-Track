@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTrack | Application Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>JobTrack<span>.</span></h2>
+        <p class="menu-label">WORKSPACE</p>
+        <a class="nav active" href="#dashboard">▦ Dashboard</a>
+        <a class="nav" href="#applications">▤ Applications</a>
+        <div class="sidebar-bottom">
+            <div class="avatar">JT</div>
+            <div>
+                <strong>My Workspace</strong>
+                <small>Job seeker</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">WORKSPACE / OVERVIEW</p>
+                <h1>Dashboard</h1>
+                <p class="muted">Track your career journey in one place.</p>
+            </div>
+            <button class="primary" onclick="showForm()">+ Add Application</button>
+        </header>
+
+        <section id="dashboard">
+            <div class="welcome">
+                <div>
+                    <p class="eyebrow light">YOUR CAREER JOURNEY</p>
+                    <h2>Every application brings you closer.</h2>
+                    <p>Stay organized, stay focused, and keep moving forward.</p>
+                </div>
+                <div class="welcome-icon">↗</div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-icon blue">▤</span>
+                    <p>Total Applications</p>
+                    <h2 id="total">0</h2>
+                    <small>All submitted applications</small>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon purple">◷</span>
+                    <p>Interviews</p>
+                    <h2 id="interviews">0</h2>
+                    <small>Interview-stage applications</small>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon green">✓</span>
+                    <p>Offers</p>
+                    <h2 id="offers">0</h2>
+                    <small>Offers received</small>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon orange">⌛</span>
+                    <p>Pending</p>
+                    <h2 id="pending">0</h2>
+                    <small>Awaiting a response</small>
+                </div>
+            </div>
+
+            <div class="charts">
+                <div class="panel">
+                    <h3>Application Overview</h3>
+                    <p class="muted">Applications by status</p>
+                    <div class="chart-wrap">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>Career Insights</h3>
+                    <p class="muted">Your current progress</p>
+                    <div class="insight">
+                        <span class="insight-icon">◎</span>
+                        <div><small>Interview rate</small><h2 id="rate">0%</h2></div>
+                    </div>
+                    <div class="progress-track"><div id="progress" class="progress-fill"></div></div>
+                    <p class="muted insight-note">Keep applying and improving your skills.</p>
+                    <hr>
+                    <div class="insight">
+                        <span class="insight-icon">★</span>
+                        <div><small>Success milestone</small><h3 id="milestone">Your journey starts here!</h3></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="applications" class="applications-section">
+            <div class="section-heading">
+                <div>
+                    <h2>My Applications</h2>
+                    <p class="muted">Manage and track every opportunity.</p>
+                </div>
+            </div>
+
+            <div id="formPanel" class="panel form-panel" hidden>
+                <h3 id="formTitle">Add New Application</h3>
+                <form id="jobForm">
+                    <input type="hidden" id="editId">
+                    <div class="form-grid">
+                        <label>Company Name *
+                            <input id="company" required placeholder="e.g. Accenture">
+                        </label>
+                        <label>Job Title *
+                            <input id="role" required placeholder="e.g. Software Engineer">
+                        </label>
+                        <label>Application Date *
+                            <input id="date" type="date" required>
+                        </label>
+                        <label>Application Status
+                            <select id="status">
+                                <option>Applied</option>
+                                <option>Interview</option>
+                                <option>Offer</option>
+                                <option>Rejected</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="secondary" onclick="hideForm()">Cancel</button>
+                        <button type="submit" class="primary">Save Application</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="panel table-panel">
+                <div class="toolbar">
+                    <input id="search" placeholder="⌕ Search company or job title...">
+                    <select id="filter">
+                        <option value="All">All Statuses</option>
+                        <option>Applied</option>
+                        <option>Interview</option>
+                        <option>Offer</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>COMPANY</th>
+                                <th>JOB TITLE</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobTable"></tbody>
+                    </table>
+                    <div id="empty" class="empty">
+                        <div class="empty-icon">▤</div>
+                        <h3>No applications yet</h3>
+                        <p>Add your first job application to get started.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>JobTrack © 2026 · Built to organize your career journey</footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
